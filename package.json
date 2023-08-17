@@ -10,9 +10,17 @@
     "express": "^4"
   },
   "devDependencies": {
+    "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+    "@sap/ux-specification": "^1.108.11",
+    "@sapui5/ts-types": "^1.92.2",
+    "eslint": "^7.32.0",
     "sqlite3": "^5"
   },
   "scripts": {
-    "start": "cds-serve"
-  }
+    "start": "cds-serve",
+    "watch-flexapp": "cds watch --open flexapp/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/flexapp"
+  ]
 }
