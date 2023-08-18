@@ -145,7 +145,23 @@
                     "options": {
                         "settings": {
                             "navigation": {},
-                            "contextPath": "/Travel"
+                            "contextPath": "/Travel",
+                            "content": {
+                                "body": {
+                                    "sections": {
+                                        "CustomSection": {
+                                            "template": "com.travel.flexapp.ext.fragment.CustomSection",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "i18nTravel"
+                                            },
+                                            "title": "{i18n>myItinearary}",
+                                            "type": "XMLFragment"
+                                        }
+                                    }
+                                }
+                            },
+                            "editableHeaderContent": false
                         }
                     },
                     "controlAggregation": "midColumnPages",

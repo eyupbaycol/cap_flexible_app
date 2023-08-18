@@ -42,7 +42,7 @@
                 <EntitySet Name="Booking" EntityType="TravelService.Booking">
                     <NavigationPropertyBinding Path="CurrencyCode" Target="Currencies"/>
                     <NavigationPropertyBinding Path="BookingStatus" Target="BookingStatus"/>
-                    <NavigationPropertyBinding Path="to_BookSuplement" Target="BookingSuplement"/>
+                    <NavigationPropertyBinding Path="to_BookSupplement" Target="BookingSupplement"/>
                     <NavigationPropertyBinding Path="to_Carrier" Target="Airline"/>
                     <NavigationPropertyBinding Path="to_Customer" Target="Passenger"/>
                     <NavigationPropertyBinding Path="to_Travel" Target="Travel"/>
@@ -67,12 +67,12 @@
                     <NavigationPropertyBinding Path="texts" Target="BookingStatus_texts"/>
                     <NavigationPropertyBinding Path="localized" Target="BookingStatus_texts"/>
                 </EntitySet>
-                <EntitySet Name="BookingSuplement" EntityType="TravelService.BookingSuplement">
+                <EntitySet Name="BookingSupplement" EntityType="TravelService.BookingSupplement">
                     <NavigationPropertyBinding Path="CurrencyCode" Target="Currencies"/>
                     <NavigationPropertyBinding Path="to_Booking" Target="Booking"/>
                     <NavigationPropertyBinding Path="to_Travel" Target="Travel"/>
-                    <NavigationPropertyBinding Path="to_Suplement" Target="Suplement"/>
-                    <NavigationPropertyBinding Path="SiblingEntity" Target="BookingSuplement"/>
+                    <NavigationPropertyBinding Path="to_Supplement" Target="Supplement"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="BookingSupplement"/>
                 </EntitySet>
                 <EntitySet Name="Airline" EntityType="TravelService.Airline">
                     <NavigationPropertyBinding Path="CurrencyCode" Target="Currencies"/>
@@ -86,20 +86,20 @@
                     <NavigationPropertyBinding Path="texts" Target="Countries_texts"/>
                     <NavigationPropertyBinding Path="localized" Target="Countries_texts"/>
                 </EntitySet>
-                <EntitySet Name="Suplement" EntityType="TravelService.Suplement">
-                    <NavigationPropertyBinding Path="Type" Target="SuplementType"/>
+                <EntitySet Name="Supplement" EntityType="TravelService.Supplement">
+                    <NavigationPropertyBinding Path="Type" Target="SupplementType"/>
                     <NavigationPropertyBinding Path="CurrencyCode" Target="Currencies"/>
-                    <NavigationPropertyBinding Path="texts" Target="Suplement_texts"/>
-                    <NavigationPropertyBinding Path="localized" Target="Suplement_texts"/>
+                    <NavigationPropertyBinding Path="texts" Target="Supplement_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Supplement_texts"/>
                 </EntitySet>
                 <EntitySet Name="FlightConnection" EntityType="TravelService.FlightConnection">
                     <NavigationPropertyBinding Path="DepartureAirport" Target="Airport"/>
                     <NavigationPropertyBinding Path="DestinationAirport" Target="Airport"/>
                     <NavigationPropertyBinding Path="to_Airline" Target="Airline"/>
                 </EntitySet>
-                <EntitySet Name="SuplementType" EntityType="TravelService.SuplementType">
-                    <NavigationPropertyBinding Path="texts" Target="SuplementType_texts"/>
-                    <NavigationPropertyBinding Path="localized" Target="SuplementType_texts"/>
+                <EntitySet Name="SupplementType" EntityType="TravelService.SupplementType">
+                    <NavigationPropertyBinding Path="texts" Target="SupplementType_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="SupplementType_texts"/>
                 </EntitySet>
                 <EntitySet Name="Airport" EntityType="TravelService.Airport">
                     <NavigationPropertyBinding Path="CountryCode" Target="Countries"/>
@@ -108,8 +108,8 @@
                 <EntitySet Name="TravelStatus_texts" EntityType="TravelService.TravelStatus_texts"/>
                 <EntitySet Name="BookingStatus_texts" EntityType="TravelService.BookingStatus_texts"/>
                 <EntitySet Name="Countries_texts" EntityType="TravelService.Countries_texts"/>
-                <EntitySet Name="Suplement_texts" EntityType="TravelService.Suplement_texts"/>
-                <EntitySet Name="SuplementType_texts" EntityType="TravelService.SuplementType_texts"/>
+                <EntitySet Name="Supplement_texts" EntityType="TravelService.Supplement_texts"/>
+                <EntitySet Name="SupplementType_texts" EntityType="TravelService.SupplementType_texts"/>
             </EntityContainer>
             <EntityType Name="Travel">
                 <Key>
@@ -137,7 +137,7 @@
                 <Property Name="TravelStatus_code" Type="Edm.String" DefaultValue="0"/>
                 <Property Name="GoGreen" Type="Edm.Boolean" DefaultValue="false"/>
                 <Property Name="GreenFee" Type="Edm.Decimal" Scale="3" Precision="16"/>
-                <Property Name="TreePlanted" Type="Edm.Int32"/>
+                <Property Name="TreesPlanted" Type="Edm.Int32"/>
                 <NavigationProperty Name="to_Agency" Type="TravelService.TravelAgency">
                     <ReferentialConstraint Property="to_Agency_AgencyID" ReferencedProperty="AgencyID"/>
                 </NavigationProperty>
@@ -231,7 +231,7 @@
                     <ReferentialConstraint Property="BookingStatus_code" ReferencedProperty="code"/>
                 </NavigationProperty>
                 <Property Name="BookingStatus_code" Type="Edm.String"/>
-                <NavigationProperty Name="to_BookSuplement" Type="Collection(TravelService.BookingSuplement)" Partner="to_Booking">
+                <NavigationProperty Name="to_BookSupplement" Type="Collection(TravelService.BookingSupplement)" Partner="to_Booking">
                     <OnDelete Action="Cascade"/>
                 </NavigationProperty>
                 <NavigationProperty Name="to_Carrier" Type="TravelService.Airline">
@@ -349,7 +349,7 @@
                     <ReferentialConstraint Property="code" ReferencedProperty="code"/>
                 </NavigationProperty>
             </EntityType>
-            <EntityType Name="BookingSuplement">
+            <EntityType Name="BookingSupplement">
                 <Key>
                     <PropertyRef Name="BookingSupplUUID"/>
                     <PropertyRef Name="IsActiveEntity"/>
@@ -359,13 +359,13 @@
                 <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LastChangedBy" Type="Edm.String" MaxLength="255"/>
                 <Property Name="BookingSupplUUID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="BookingSuplementID" Type="Edm.Int32"/>
+                <Property Name="BookingSupplementID" Type="Edm.Int32"/>
                 <Property Name="Price" Type="Edm.Decimal" Scale="3" Precision="16"/>
                 <NavigationProperty Name="CurrencyCode" Type="TravelService.Currencies">
                     <ReferentialConstraint Property="CurrencyCode_code" ReferencedProperty="code"/>
                 </NavigationProperty>
                 <Property Name="CurrencyCode_code" Type="Edm.String" MaxLength="3"/>
-                <NavigationProperty Name="to_Booking" Type="TravelService.Booking" Partner="to_BookSuplement">
+                <NavigationProperty Name="to_Booking" Type="TravelService.Booking" Partner="to_BookSupplement">
                     <ReferentialConstraint Property="to_Booking_BookingUUID" ReferencedProperty="BookingUUID"/>
                 </NavigationProperty>
                 <Property Name="to_Booking_BookingUUID" Type="Edm.String" MaxLength="30"/>
@@ -373,15 +373,15 @@
                     <ReferentialConstraint Property="to_Travel_TravelUUID" ReferencedProperty="TravelUUID"/>
                 </NavigationProperty>
                 <Property Name="to_Travel_TravelUUID" Type="Edm.String" MaxLength="30"/>
-                <NavigationProperty Name="to_Suplement" Type="TravelService.Suplement">
-                    <ReferentialConstraint Property="to_Suplement_SupplementID" ReferencedProperty="SupplementID"/>
+                <NavigationProperty Name="to_Supplement" Type="TravelService.Supplement">
+                    <ReferentialConstraint Property="to_Supplement_SupplementID" ReferencedProperty="SupplementID"/>
                 </NavigationProperty>
-                <Property Name="to_Suplement_SupplementID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="to_Supplement_SupplementID" Type="Edm.String" MaxLength="10"/>
                 <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
                 <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
                 <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
                 <NavigationProperty Name="DraftAdministrativeData" Type="TravelService.DraftAdministrativeData" ContainsTarget="true"/>
-                <NavigationProperty Name="SiblingEntity" Type="TravelService.BookingSuplement"/>
+                <NavigationProperty Name="SiblingEntity" Type="TravelService.BookingSupplement"/>
             </EntityType>
             <EntityType Name="Airline">
                 <Key>
@@ -435,7 +435,7 @@
                     <ReferentialConstraint Property="code" ReferencedProperty="code"/>
                 </NavigationProperty>
             </EntityType>
-            <EntityType Name="Suplement">
+            <EntityType Name="Supplement">
                 <Key>
                     <PropertyRef Name="SupplementID"/>
                 </Key>
@@ -445,7 +445,7 @@
                 <Property Name="LastChangedBy" Type="Edm.String" MaxLength="255"/>
                 <Property Name="SupplementID" Type="Edm.String" MaxLength="10" Nullable="false"/>
                 <Property Name="Price" Type="Edm.Decimal" Scale="3" Precision="16"/>
-                <NavigationProperty Name="Type" Type="TravelService.SuplementType">
+                <NavigationProperty Name="Type" Type="TravelService.SupplementType">
                     <ReferentialConstraint Property="Type_code" ReferencedProperty="code"/>
                 </NavigationProperty>
                 <Property Name="Type_code" Type="Edm.String"/>
@@ -454,10 +454,10 @@
                     <ReferentialConstraint Property="CurrencyCode_code" ReferencedProperty="code"/>
                 </NavigationProperty>
                 <Property Name="CurrencyCode_code" Type="Edm.String" MaxLength="3"/>
-                <NavigationProperty Name="texts" Type="Collection(TravelService.Suplement_texts)">
+                <NavigationProperty Name="texts" Type="Collection(TravelService.Supplement_texts)">
                     <OnDelete Action="Cascade"/>
                 </NavigationProperty>
-                <NavigationProperty Name="localized" Type="TravelService.Suplement_texts">
+                <NavigationProperty Name="localized" Type="TravelService.Supplement_texts">
                     <ReferentialConstraint Property="SupplementID" ReferencedProperty="SupplementID"/>
                 </NavigationProperty>
             </EntityType>
@@ -484,17 +484,17 @@
                     <ReferentialConstraint Property="AirlineID" ReferencedProperty="AirlineID"/>
                 </NavigationProperty>
             </EntityType>
-            <EntityType Name="SuplementType">
+            <EntityType Name="SupplementType">
                 <Key>
                     <PropertyRef Name="code"/>
                 </Key>
                 <Property Name="name" Type="Edm.String" MaxLength="255"/>
                 <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
                 <Property Name="code" Type="Edm.String" Nullable="false"/>
-                <NavigationProperty Name="texts" Type="Collection(TravelService.SuplementType_texts)">
+                <NavigationProperty Name="texts" Type="Collection(TravelService.SupplementType_texts)">
                     <OnDelete Action="Cascade"/>
                 </NavigationProperty>
-                <NavigationProperty Name="localized" Type="TravelService.SuplementType_texts">
+                <NavigationProperty Name="localized" Type="TravelService.SupplementType_texts">
                     <ReferentialConstraint Property="code" ReferencedProperty="code"/>
                 </NavigationProperty>
             </EntityType>
@@ -563,7 +563,7 @@
                 <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
                 <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
             </EntityType>
-            <EntityType Name="Suplement_texts">
+            <EntityType Name="Supplement_texts">
                 <Key>
                     <PropertyRef Name="locale"/>
                     <PropertyRef Name="SupplementID"/>
@@ -572,7 +572,7 @@
                 <Property Name="SupplementID" Type="Edm.String" MaxLength="10" Nullable="false"/>
                 <Property Name="Description" Type="Edm.String" MaxLength="1024"/>
             </EntityType>
-            <EntityType Name="SuplementType_texts">
+            <EntityType Name="SupplementType_texts">
                 <Key>
                     <PropertyRef Name="locale"/>
                     <PropertyRef Name="code"/>
@@ -599,9 +599,9 @@
                 <ReturnType Type="TravelService.Booking"/>
             </Action>
             <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="TravelService.BookingSuplement"/>
+                <Parameter Name="in" Type="TravelService.BookingSupplement"/>
                 <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
-                <ReturnType Type="TravelService.BookingSuplement"/>
+                <ReturnType Type="TravelService.BookingSupplement"/>
             </Action>
             <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
                 <Parameter Name="in" Type="TravelService.Travel"/>
@@ -701,7 +701,7 @@
                                                         <Annotations Target="TravelService.Travel/GreenFee">
                                                             <Annotation Term="Core.Computed" Bool="true"/>
                                                         </Annotations>
-                                                        <Annotations Target="TravelService.Travel/TreePlanted">
+                                                        <Annotations Target="TravelService.Travel/TreesPlanted">
                                                             <Annotation Term="Core.Computed" Bool="true"/>
                                                         </Annotations>
                                                         <Annotations Target="TravelService.Travel/IsActiveEntity">
@@ -1016,45 +1016,45 @@
                                                                                                                                                                                                                 </Collection>
                                                                                                                                                                                                             </Annotation>
                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                        <Annotations Target="TravelService.EntityContainer/BookingSuplement">
+                                                                                                                                                                                                        <Annotations Target="TravelService.EntityContainer/BookingSupplement">
                                                                                                                                                                                                             <Annotation Term="Common.DraftNode">
                                                                                                                                                                                                                 <Record Type="Common.DraftNodeType">
                                                                                                                                                                                                                     <PropertyValue Property="PreparationAction" String="TravelService.draftPrepare"/>
                                                                                                                                                                                                                 </Record>
                                                                                                                                                                                                             </Annotation>
                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                        <Annotations Target="TravelService.BookingSuplement/createdAt">
+                                                                                                                                                                                                        <Annotations Target="TravelService.BookingSupplement/createdAt">
                                                                                                                                                                                                             <Annotation Term="UI.HiddenFilter" Bool="true"/>
                                                                                                                                                                                                             <Annotation Term="Core.Immutable" Bool="true"/>
                                                                                                                                                                                                             <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                             <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
                                                                                                                                                                                                             </Annotations>
-                                                                                                                                                                                                            <Annotations Target="TravelService.BookingSuplement/createdBy">
+                                                                                                                                                                                                            <Annotations Target="TravelService.BookingSupplement/createdBy">
                                                                                                                                                                                                                 <Annotation Term="UI.HiddenFilter" Bool="true"/>
                                                                                                                                                                                                                 <Annotation Term="Core.Immutable" Bool="true"/>
                                                                                                                                                                                                                 <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                                 <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
                                                                                                                                                                                                                     <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSuplement/LastChangedAt">
+                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSupplement/LastChangedAt">
                                                                                                                                                                                                                         <Annotation Term="UI.HiddenFilter" Bool="true"/>
                                                                                                                                                                                                                         <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                                         <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
                                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                                        <Annotations Target="TravelService.BookingSuplement/LastChangedBy">
+                                                                                                                                                                                                                        <Annotations Target="TravelService.BookingSupplement/LastChangedBy">
                                                                                                                                                                                                                             <Annotation Term="UI.HiddenFilter" Bool="true"/>
                                                                                                                                                                                                                             <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                                             <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
                                                                                                                                                                                                                                 <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
                                                                                                                                                                                                                                 </Annotations>
-                                                                                                                                                                                                                                <Annotations Target="TravelService.BookingSuplement/BookingSuplementID">
+                                                                                                                                                                                                                                <Annotations Target="TravelService.BookingSupplement/BookingSupplementID">
                                                                                                                                                                                                                                     <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                                                 </Annotations>
-                                                                                                                                                                                                                                <Annotations Target="TravelService.BookingSuplement/CurrencyCode">
+                                                                                                                                                                                                                                <Annotations Target="TravelService.BookingSupplement/CurrencyCode">
                                                                                                                                                                                                                                     <Annotation Term="Common.Label" String="{i18n>Currency}"/>
                                                                                                                                                                                                                                         <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
                                                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                                                        <Annotations Target="TravelService.BookingSuplement/CurrencyCode_code">
+                                                                                                                                                                                                                                        <Annotations Target="TravelService.BookingSupplement/CurrencyCode_code">
                                                                                                                                                                                                                                             <Annotation Term="Common.Label" String="{i18n>Currency}"/>
                                                                                                                                                                                                                                                 <Annotation Term="Common.ValueList">
                                                                                                                                                                                                                                                     <Record Type="Common.ValueListType">
@@ -1075,16 +1075,16 @@
                                                                                                                                                                                                                                                     </Annotation>
                                                                                                                                                                                                                                                     <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
                                                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSuplement/IsActiveEntity">
+                                                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSupplement/IsActiveEntity">
                                                                                                                                                                                                                                                         <Annotation Term="UI.Hidden" Bool="true"/>
                                                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSuplement/HasActiveEntity">
+                                                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSupplement/HasActiveEntity">
                                                                                                                                                                                                                                                         <Annotation Term="UI.Hidden" Bool="true"/>
                                                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSuplement/HasDraftEntity">
+                                                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSupplement/HasDraftEntity">
                                                                                                                                                                                                                                                         <Annotation Term="UI.Hidden" Bool="true"/>
                                                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSuplement/DraftAdministrativeData">
+                                                                                                                                                                                                                                                    <Annotations Target="TravelService.BookingSupplement/DraftAdministrativeData">
                                                                                                                                                                                                                                                         <Annotation Term="UI.Hidden" Bool="true"/>
                                                                                                                                                                                                                                                     </Annotations>
                                                                                                                                                                                                                                                     <Annotations Target="TravelService.EntityContainer/Airline">
@@ -1193,7 +1193,7 @@
                                                                                                                                                                                                                                                                                                         <Annotation Term="Common.Text" Path="name"/>
                                                                                                                                                                                                                                                                                                         <Annotation Term="Common.Label" String="{i18n>CountryCode}"/>
                                                                                                                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.EntityContainer/Suplement">
+                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.EntityContainer/Supplement">
                                                                                                                                                                                                                                                                                                             <Annotation Term="Capabilities.DeleteRestrictions">
                                                                                                                                                                                                                                                                                                                 <Record Type="Capabilities.DeleteRestrictionsType">
                                                                                                                                                                                                                                                                                                                     <PropertyValue Property="Deletable" Bool="false"/>
@@ -1210,35 +1210,35 @@
                                                                                                                                                                                                                                                                                                                 </Record>
                                                                                                                                                                                                                                                                                                             </Annotation>
                                                                                                                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.Suplement/createdAt">
+                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.Supplement/createdAt">
                                                                                                                                                                                                                                                                                                             <Annotation Term="UI.HiddenFilter" Bool="true"/>
                                                                                                                                                                                                                                                                                                             <Annotation Term="Core.Immutable" Bool="true"/>
                                                                                                                                                                                                                                                                                                             <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                                                                                                                             <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
                                                                                                                                                                                                                                                                                                             </Annotations>
-                                                                                                                                                                                                                                                                                                            <Annotations Target="TravelService.Suplement/createdBy">
+                                                                                                                                                                                                                                                                                                            <Annotations Target="TravelService.Supplement/createdBy">
                                                                                                                                                                                                                                                                                                                 <Annotation Term="UI.HiddenFilter" Bool="true"/>
                                                                                                                                                                                                                                                                                                                 <Annotation Term="Core.Immutable" Bool="true"/>
                                                                                                                                                                                                                                                                                                                 <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                                                                                                                                 <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
                                                                                                                                                                                                                                                                                                                     <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
                                                                                                                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                                                                                                                    <Annotations Target="TravelService.Suplement/LastChangedAt">
+                                                                                                                                                                                                                                                                                                                    <Annotations Target="TravelService.Supplement/LastChangedAt">
                                                                                                                                                                                                                                                                                                                         <Annotation Term="UI.HiddenFilter" Bool="true"/>
                                                                                                                                                                                                                                                                                                                         <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                                                                                                                                         <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
                                                                                                                                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.Suplement/LastChangedBy">
+                                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.Supplement/LastChangedBy">
                                                                                                                                                                                                                                                                                                                             <Annotation Term="UI.HiddenFilter" Bool="true"/>
                                                                                                                                                                                                                                                                                                                             <Annotation Term="Core.Computed" Bool="true"/>
                                                                                                                                                                                                                                                                                                                             <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
                                                                                                                                                                                                                                                                                                                                 <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
                                                                                                                                                                                                                                                                                                                                 </Annotations>
-                                                                                                                                                                                                                                                                                                                                <Annotations Target="TravelService.Suplement/Type_code">
+                                                                                                                                                                                                                                                                                                                                <Annotations Target="TravelService.Supplement/Type_code">
                                                                                                                                                                                                                                                                                                                                     <Annotation Term="Common.ValueList">
                                                                                                                                                                                                                                                                                                                                         <Record Type="Common.ValueListType">
-                                                                                                                                                                                                                                                                                                                                            <PropertyValue Property="Label" String="SuplementType"/>
-                                                                                                                                                                                                                                                                                                                                            <PropertyValue Property="CollectionPath" String="SuplementType"/>
+                                                                                                                                                                                                                                                                                                                                            <PropertyValue Property="Label" String="SupplementType"/>
+                                                                                                                                                                                                                                                                                                                                            <PropertyValue Property="CollectionPath" String="SupplementType"/>
                                                                                                                                                                                                                                                                                                                                             <PropertyValue Property="Parameters">
                                                                                                                                                                                                                                                                                                                                                 <Collection>
                                                                                                                                                                                                                                                                                                                                                     <Record Type="Common.ValueListParameterInOut">
@@ -1253,11 +1253,11 @@
                                                                                                                                                                                                                                                                                                                                         </Record>
                                                                                                                                                                                                                                                                                                                                     </Annotation>
                                                                                                                                                                                                                                                                                                                                 </Annotations>
-                                                                                                                                                                                                                                                                                                                                <Annotations Target="TravelService.Suplement/CurrencyCode">
+                                                                                                                                                                                                                                                                                                                                <Annotations Target="TravelService.Supplement/CurrencyCode">
                                                                                                                                                                                                                                                                                                                                     <Annotation Term="Common.Label" String="{i18n>Currency}"/>
                                                                                                                                                                                                                                                                                                                                         <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
                                                                                                                                                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.Suplement/CurrencyCode_code">
+                                                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.Supplement/CurrencyCode_code">
                                                                                                                                                                                                                                                                                                                                             <Annotation Term="Common.Label" String="{i18n>Currency}"/>
                                                                                                                                                                                                                                                                                                                                                 <Annotation Term="Common.ValueList">
                                                                                                                                                                                                                                                                                                                                                     <Record Type="Common.ValueListType">
@@ -1295,7 +1295,7 @@
                                                                                                                                                                                                                                                                                                                                                             </Record>
                                                                                                                                                                                                                                                                                                                                                         </Annotation>
                                                                                                                                                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="TravelService.SuplementType">
+                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="TravelService.SupplementType">
                                                                                                                                                                                                                                                                                                                                                         <Annotation Term="UI.Identification">
                                                                                                                                                                                                                                                                                                                                                             <Collection>
                                                                                                                                                                                                                                                                                                                                                                 <Record Type="UI.DataField">
@@ -1304,13 +1304,13 @@
                                                                                                                                                                                                                                                                                                                                                             </Collection>
                                                                                                                                                                                                                                                                                                                                                         </Annotation>
                                                                                                                                                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="TravelService.SuplementType/name">
+                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="TravelService.SupplementType/name">
                                                                                                                                                                                                                                                                                                                                                         <Annotation Term="Common.Label" String="{i18n>Name}"/>
                                                                                                                                                                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.SuplementType/descr">
+                                                                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.SupplementType/descr">
                                                                                                                                                                                                                                                                                                                                                             <Annotation Term="Common.Label" String="{i18n>Description}"/>
                                                                                                                                                                                                                                                                                                                                                             </Annotations>
-                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="TravelService.SuplementType/code">
+                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="TravelService.SupplementType/code">
                                                                                                                                                                                                                                                                                                                                                                 <Annotation Term="Validation.AllowedValues">
                                                                                                                                                                                                                                                                                                                                                                     <Collection>
                                                                                                                                                                                                                                                                                                                                                                         <Record Type="Validation.AllowedValue">
@@ -1484,19 +1484,19 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <Annotation Term="Common.Text" Path="name"/>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <Annotation Term="Common.Label" String="{i18n>CountryCode}"/>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </Annotations>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="TravelService.Suplement_texts/locale">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="TravelService.Supplement_texts/locale">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </Annotations>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <Annotations Target="TravelService.SuplementType_texts/locale">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <Annotations Target="TravelService.SupplementType_texts/locale">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </Annotations>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="TravelService.SuplementType_texts/name">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="TravelService.SupplementType_texts/name">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <Annotation Term="Common.Label" String="{i18n>Name}"/>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </Annotations>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.SuplementType_texts/descr">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <Annotations Target="TravelService.SupplementType_texts/descr">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <Annotation Term="Common.Label" String="{i18n>Description}"/>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </Annotations>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="TravelService.SuplementType_texts/code">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="TravelService.SupplementType_texts/code">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <Annotation Term="Validation.AllowedValues">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <Collection>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <Record Type="Validation.AllowedValue">

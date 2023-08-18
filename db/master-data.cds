@@ -23,10 +23,10 @@ entity Airport : MasterData {
         CountryCode : Country;
 }
 
-entity Suplement : managed, MasterData {
+entity Supplement : managed, MasterData {
     key SupplementID : String(10);
         Price        : Decimal(16, 3);
-        Type         : Association to SuplementType;
+        Type         : Association to SupplementType;
         Description  : localized String(1024);
         CurrencyCode : Currency;
 }
@@ -89,7 +89,7 @@ entity TravelAgency : MasterData {
     WebAddress : String(256);
 }
 
-entity SuplementType : sap.common.CodeList {
+entity SupplementType : sap.common.CodeList {
     key code : String enum {
             Beverage = 'BV';
             Meal     = 'ML';

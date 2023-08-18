@@ -116,12 +116,6 @@ annotate service.Travel with @(
                     Target : '@UI.FieldGroup#i18nSustainabilty',
                 },],
         },
-        {
-            $Type : 'UI.ReferenceFacet',
-            Label : '{i18n>MyItinearay}',
-            ID : 'i18nMyItinearay',
-            Target : 'to_Booking/@UI.LineItem#i18nMyItinearay',
-        },
     ]
 );
 annotate service.Travel with @(
@@ -191,8 +185,8 @@ annotate service.Travel with @(
                 Label : 'GreenFee',
             },{
                 $Type : 'UI.DataField',
-                Value : TreePlanted,
-                Label : 'TreePlanted',
+                Value : TreesPlanted,
+                Label : 'TreesPlanted',
             },],
     }
 );

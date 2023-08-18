@@ -9,7 +9,7 @@
 					<Title id="_IDGenTitle1" text="Filter  Bar" level="H2" />
 				</f:heading>
 				<f:snappedContent>
-                    <Panel id="panel1" headerText="Highest Price Tiles">
+                    <Panel id="_IDGenPanel1"  headerText="Highest Price Tiles">
                         <HeaderContainer  id="headerContainer1" scrollStep="200" showDividers="false" content="{
                             path: '/Travel',
                             parameters: {
@@ -24,7 +24,7 @@
                             </GenericTile>
                         </HeaderContainer>
                     </Panel>
-                    <Panel id="panel2" headerText="Filter Count">
+                    <Panel id="_IDGenPanel2"  headerText="Filter Count">
                         <Text id="text1" text="{fbConditions>/filtersTextInfo}" />
                     </Panel>
 				</f:snappedContent>

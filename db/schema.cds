@@ -4,7 +4,7 @@ using {
     master.data.travel.Airline,
     master.data.travel.Passenger,
     master.data.travel.TravelAgency,
-    master.data.travel.Suplement,
+    master.data.travel.Supplement,
     master.data.travel.Flight
  } from './master-data';
 
@@ -24,7 +24,7 @@ entity Travel : managed {
     TravelStatus : Association to TravelStatus @readonly @Common.ValueListWithFixedValues;
     GoGreen : Boolean default false;
     GreenFee : Decimal(16, 3) @Core.Computed @readonly;
-    TreePlanted : Integer @Core.Computed @readonly;
+    TreesPlanted : Integer @Core.Computed @readonly;
     to_Agency : Association to TravelAgency;
     to_Customer : Association to Passenger;
     to_Booking  : Composition of many Booking on to_Booking.to_Travel = $self; 
@@ -39,7 +39,7 @@ entity Booking : managed {
     FlightPrice : Decimal(16, 3);
     CurrencyCode : Currency;
     BookingStatus : Association to BookingStatus;
-    to_BookSuplement : Composition of  many BookingSuplement on to_BookSuplement.to_Booking = $self;
+    to_BookSupplement : Composition of  many BookingSupplement on to_BookSupplement.to_Booking = $self;
     to_Carrier : Association to Airline;
     to_Customer : Association to  Passenger;
     to_Travel  : Association to  Travel;
@@ -49,14 +49,14 @@ entity Booking : managed {
 
 }
 
-entity BookingSuplement : managed {
-    key BookingSupplUUID : UUID;
-    BookingSuplementID : Integer @Core.Computed;
+entity BookingSupplement : managed {
+    key BookSupplUUID : UUID;
+    BookingSupplementID : Integer @Core.Computed;
     Price : Decimal(16, 3);
     CurrencyCode : Currency;
     to_Booking : Association to Booking;
     to_Travel  : Association to Travel;
-    to_Suplement : Association to Suplement;
+    to_Supplement : Association to Supplement;
 }
 
 entity BookingStatus : CodeList {
