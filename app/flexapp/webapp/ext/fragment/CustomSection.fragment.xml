@@ -3,8 +3,14 @@
 			<MessageStrip id="_IDGenMessageStrip1" text="All the Booking for the Travel id {TravelID} has been confirmed" showIcon="true" > 
 			</MessageStrip>
 			<l:Grid id="_IDGenGrid1" hSpacing="1" containerQuery="true" >
+				<l:dependents>
+					<core:Fragment fragmentName="com.travel.flexapp.ext.fragment.popover" type="XML" />
+				</l:dependents>
 				<l:content>
 					<macros:Table metaPath="to_Booking/@UI.LineItem#i18nMyItinearay" id="bookinTable" />
+					<macros:Chart id="BookingStatistics" metaPath="@com.sap.vocabularies.UI.v1.Chart#BookingStatistics" 
+                					contextPath="/Travel/to_BookedFlights" personalization="Type,Item" selectionMode="Single" 
+                					selectionChange="handler.onChartSelectionChange"/>
 				</l:content>
 			</l:Grid>
 		</VBox>

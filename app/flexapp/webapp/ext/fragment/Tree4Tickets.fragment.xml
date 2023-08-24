@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:macros="sap.fe.macros" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+    <Dialog title="Opt for Trees-4-Ticket" icon="sap-icon://flight" id="Trees4Tickets" contentWidth="38rem">
+        <content>
+            <MessageStrip text="Plat some trees if you love nature just by adding 1% extra cost to your travel" type="Success" showIcon="{GoGreen}"></MessageStrip>
+            <f:Form>
+                <f:layout>
+				<f:ColumnLayout
+					columnsXL="2"
+					columnsL="2"
+					columnsM="2"/>
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:formElements>
+                            <f:FormElement>
+                                <f:label>
+                                    <Label text="Total Price" />
+                                </f:label>
+                            </f:FormElement> 
+                            <macros:FormElement metaPath="TotalPrice" id="formElementMacroID1" />
+                            <f:FormElement>
+                                <f:label>
+                                    <Label text="Go Green" />
+                                </f:label>
+                            </f:FormElement> 
+                            <macros:FormElement metaPath="GoGreen" id="formElementMacroID2" />                                                                           
+                        </f:formElements>
+                    </f:FormContainer>
+                    <f:FormContainer visible="{GoGreen}">
+                        <f:formElements>                                         
+                            <f:FormElement>
+                                <f:label>
+                                    <Label text="Green Fee" />
+                                </f:label>
+                            </f:FormElement> 
+                            <macros:FormElement metaPath="GreenFee"  id="formElementMacroID3" />
+                            <f:FormElement>
+                                <f:label>
+                                    <Label text="Trees Planted" />
+                                </f:label>
+                            </f:FormElement> 
+                            <macros:FormElement metaPath="TreesPlanted" id="formElementMacroID4" />                              
+                        </f:formElements>
+                    </f:FormContainer>                    
+                </f:formContainers>
+            </f:Form>      
+        </content>
+        <beginButton>
+            <Button id="save" text="Save" type="Emphasized"></Button>
+        </beginButton>
+        <endButton>
+            <Button id="cancel" text="Cancel" type="Reject"></Button>
+        </endButton>
+    </Dialog>
+
+</core:FragmentDefinition>

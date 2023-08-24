@@ -39,19 +39,17 @@ annotate TravelService.Travel {
     );
 };
 
-annotate TravelService.Travel with @Common: {SideEffects: {
-    $Type           : 'Common.SideEffectsType',
-    SourceProperties: [
-        GoGreen,
-        BookingFee
+annotate TravelService.Travel with @Common : { SideEffects  : {
+    $Type : 'Common.SideEffectsType',
+    SourceProperties: [GoGreen, BookingFee],
+    SourceEntities : [
+        to_Booking
     ],
-    SourceEntities  : [to_Booking],
-    TargetProperties: [
+    TargetProperties : [
         'TotalPrice',
         'GreenFee',
         'TreesPlanted'
-    ]
-
+    ],
 }, };
 
 annotate TravelService.Booking with {

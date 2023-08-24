@@ -14,6 +14,7 @@ service TravelService @(path:'/processer', requires : 'authenticated-user') {
    entity BookedFlights as projection on my.BookedFlights;
    entity Booking as projection on my.Booking;
 */
+   entity BookedFlights as projection on my.BookedFlights;
    annotate my.MasterData with @cds.autoexpose @readonly ;
    
 }

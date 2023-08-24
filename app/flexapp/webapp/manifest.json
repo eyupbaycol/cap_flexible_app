@@ -161,7 +161,7 @@
                                     }
                                 }
                             },
-                            "editableHeaderContent": false
+                            "editableHeaderContent": true
                         }
                     },
                     "controlAggregation": "midColumnPages",
@@ -178,7 +178,11 @@
         },
         "extends": {
             "extensions": {
-                "sap.ui.controllerExtensions": {}
+                "sap.ui.controllerExtensions": {
+                    "sap.fe.templates.ObjectPage.ObjectPageController": {
+                        "controllerName": "com.travel.flexapp.ext.controller.CustomControllerExt"
+                    }
+                }
             }
         },
         "rootView": {

@@ -1,4 +1,5 @@
 using TravelService as service from '../../srv/travel-service';
+using from '../capabilities';
 
 annotate service.Travel with @(
     UI.SelectionFields : [
@@ -249,6 +250,39 @@ annotate service.Booking with @(
                 DataPoint : '@UI.DataPoint#BookedFlights',
                 Role : #Axis1,
                 Measure : BookedFlights,
+            },
+        ],
+    }
+);
+annotate service.BookedFlights with @(
+    UI.Chart #BookingStatistics : {
+        $Type : 'UI.ChartDefinitionType',
+        Title : 'All Booked Flights',
+        ChartType : #Column,
+        Dimensions : [
+            to_Customer_CustomerID,
+            AirlineID,
+        ],
+        DimensionAttributes : [
+            {
+                $Type : 'UI.ChartDimensionAttributeType',
+                Dimension : to_Customer_CustomerID,
+                Role : #Category,
+            },
+            {
+                $Type : 'UI.ChartDimensionAttributeType',
+                Dimension : AirlineID,
+                Role : #Series,
+            },
+        ],
+        Measures : [
+            CountFlights,
+        ],
+        MeasureAttributes : [
+            {
+                $Type : 'UI.ChartMeasureAttributeType',
+                Measure : CountFlights,
+                Role : #Axis1,
             },
         ],
     }
